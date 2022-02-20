@@ -1,7 +1,8 @@
+# Updated quadratic function
 def get_new_velocity(mass, prev_vel, force, i):
-    a = 0 - (mass/2)
-    b = (force * segment_len_arr[i-1] / prev_vel ) + (mass * prev_vel)
-    c = (K_a * A_m * segment_len_arr[i-1] * pow(prev_vel + (v_w * math.sin(abs(theta_rider[t] - theta_w))), 2) 
-    + (g * gradient_rider[i] * mass * segment_len_arr[i-1]) + (K_r * mass * segment_len_arr[i-1]) 
-    + ((mass * pow(prev_vel,2)) / 2))
+    a = (1 / 2) * (mass * prev_vel / segment_len_arr[i-1])
+    b = 0 - force
+    c = (K_a * A_m * prev_vel * pow(prev_vel + (v_w * math.sin((math.pi / 2) - abs(theta_rider[t] - theta_w))), 2) 
+    - (g * gradient_rider[i] * mass * prev_vel) + (K_r * mass * prev_vel) 
+    - ((mass * pow(prev_vel,3)) / (2 * segment_len_arr[i-1]))
     return (-b + math.sqrt(b**2 - 4*a*c)) / (2 * a)
